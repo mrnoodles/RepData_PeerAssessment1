@@ -1,20 +1,26 @@
 # Reproducible Research: Peer Assessment 1
 
-
 ## Loading and preprocessing the data
-
+```{r}
+activity <- read.csv("activity.csv")
+clean_activity <- activity[complete.cases(activity), ]
+```
 
 
 ## What is mean total number of steps taken per day?
+```{r}
+clean_days <- split(clean_activity$steps, clean_activity$date, drop=TRUE)
+
+for (i in 1:length(clean_days))
+    clean_days[i] = sum(clean_days[[i]])
+    
+    clean_sum <- as.numeric(clean_days)
+
+hist(as.numeric(clean_sum), breaks=53)
+
+print(paste0("The mean is ", mean(clean_sum)))
+print(paste0("The median is ", median(clean_sum)))
 
 
+```
 
-## What is the average daily activity pattern?
-
-
-
-## Imputing missing values
-
-
-
-## Are there differences in activity patterns between weekdays and weekends?
